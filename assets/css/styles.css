@@ -1,0 +1,57 @@
+body
+{   
+    background-color: #EEF5DB;
+}
+
+fieldset
+{
+    border: 0;
+}
+
+#left-icon
+{
+    border-radius: 1em 0 0 1em;
+}
+
+#right-icon
+{
+    border-radius:  0 1em 1em 0;
+}
+
+#egg-size-selection label, .icon
+{
+    background-color: #C2C9B1;
+}
+
+#egg-size-selection label:hover, .icon:hover
+{
+    background-color: #929785;
+    cursor: pointer;
+}
+
+#egg-size-selection input:checked + label
+{
+    background-color: #616559;
+}
+
+#small-eggs-label
+{
+    border-radius: .2em 0 0 .2em;
+}
+
+#large-eggs-label
+{
+    border-radius: 0 .2em .2em 0;
+}
+
+#egg-info input[type="submit"]
+{
+    background-color: #FFC421;
+    border: 0;
+    border-radius: 1em;
+}
+
+#egg-info input[type="submit"]:hover
+{
+    background-color: rgb(42, 120, 11);
+}
