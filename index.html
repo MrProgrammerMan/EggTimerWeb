@@ -5,47 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/structure.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/page-specific/index.css">
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/timers.js"></script>
+    <script src="assets/js/loadURL.js"></script>
     <title>Egg Timer</title>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="#tips"><img src="assets/imgs/question-mark-icon.svg" alt="Tips and tricks icon" class="icon"></a></li>
-                <li><a href="#home"><img src="assets/imgs/egg-icon.svg" alt='Egg "home" icon' class="icon"></a></li>
-                <li><a href="#settings"><img src="assets/imgs/settings-icon.svg" alt="Settings icon" class="icon"></a></li>
+                <li><a href="tips-and-tricks.html"><img src="assets/imgs/question-mark-icon.svg" alt="Tips and tricks icon" class="icon" id="left-icon"></a></li>
+                <li><a href="index.html"><img src="assets/imgs/egg-icon.svg" alt='Egg "home" icon' class="icon" id="middle-icon"></a></li>
+                <li><a href="settings.html"><img src="assets/imgs/settings-icon.svg" alt="Settings icon" class="icon" id="right-icon"></a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <form action="TO-BE-ADDED.js" id="egg-info">
+        <form action="#start" id="egg-info">
             <h1 class="visually-hidden">Multiple egg timers</h1>
             <fieldset id="egg-size-selection">
                 <legend class="visually-hidden">Egg size:</legend>
-                <input type="radio" id="small" name="egg-size" value="small">
-                <label for="small">S</label>
-                <input type="radio" id="medium" name="egg-size" value="medium" checked>
-                <label for="medium">M</label>
-                <input type="radio" id="large" name="egg-size" value="large">
-                <label for="large">L</label>
+                <input type="radio" id="small-eggs" name="egg-size" value="small">
+                <label for="small-eggs" id="small-eggs-label">S</label>
+                <input type="radio" id="medium-eggs" name="egg-size" value="medium" checked>
+                <label for="medium-eggs" id="medium-eggs-label">M</label>
+                <input type="radio" id="large-eggs" name="egg-size" value="large">
+                <label for="large-eggs" id="large-eggs-label">L</label>
             </fieldset>
             <fieldset id="egg-amount-selection">
                 <legend class="visually-hidden">Amount of eggs for each boiling degree:</legend>
-                <h2>Soft:</h2>
-                <input type="range" min="0" max="9" value="0" id="no-soft-eggs">
-                <label for="no-soft-eggs" class="visually-hidden">Number of soft-boiled eggs</label>
-                <h2>Medium:</h2>
-                <input type="range" min="0" max="9" value="0" id="no-medium-eggs">
-                <label for="no-medium-eggs" class="visually-hidden">Number of medium-boiled eggs</label>
-                <h2>Hard:</h2>
-                <input type="range" min="0" max="9" value="0" id="no-hard-eggs">
-                <label for="no-hard-eggs" class="visually-hidden">Number of hard-boiled eggs</label>
-                <input type="submit" value="Start">
+                <!--Select number of soft boiled eggs-->
+                <h2>Soft: <span id="no-soft-eggs-visual">0</span></h2>
+                <input
+                    type="range"
+                    min="0" max="9" value="0"
+                    name="no-soft-eggs" id="no-soft-eggs">
+                <label for="no-soft-eggs" class="visually-hidden">Number of soft-boiled eggs(0-9)</label>
+                <!--Select number of medium boiled eggs-->
+                <h2>Medium: <span id="no-medium-eggs-visual">0</span></h2>
+                <input
+                    type="range"
+                    min="0" max="9" value="0"
+                    name="no-medium-eggs" id="no-medium-eggs">
+                <label for="no-medium-eggs" class="visually-hidden">Number of medium-boiled eggs(0-9)</label>
+                <!--Select number of hard boiled eggs-->
+                <h2>Hard: <span id="no-hard-eggs-visual">0</span></h2>
+                <input
+                    type="range"
+                    min="0" max="9" value="0"
+                    name="no-hard-eggs" id="no-hard-eggs">
+                <label for="no-hard-eggs" class="visually-hidden">Number of hard-boiled eggs(0-9)</label>
             </fieldset>
+            <input type="submit" value="Start">
         </form>
     </main>
     <footer>
-        <h3>©Copyright 2024</h3>
+        <h3>Made by Jonas B.</h3>
     </footer>
 </body>
 </html>
