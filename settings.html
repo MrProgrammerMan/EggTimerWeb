@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/structure.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/page-specific/settings.css">
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/loadURL.js"></script>
+    <title>Egg Timer</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="tips-and-tricks.html"><img src="assets/imgs/question-mark-icon.svg" alt="Tips and tricks icon" class="icon" id="left-icon"></a></li>
+                <li><a href="index.html"><img src="assets/imgs/egg-icon.svg" alt='Egg "home" icon' class="icon" id="middle-icon"></a></li>
+                <li><a href="settings.html"><img src="assets/imgs/settings-icon.svg" alt="Settings icon" class="icon" id="right-icon"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form action="#save" id="egg-info">
+            <h1 class="visually-hidden">Settings for boiling time</h1>
+            <fieldset id="egg-size-selection" onchange="loadBoilingTimes()">
+                <legend class="visually-hidden">Egg size:</legend>
+                <input type="radio" id="small-eggs" name="egg-size" value="small">
+                <label for="small-eggs" id="small-eggs-label">S</label>
+                <input type="radio" id="medium-eggs" name="egg-size" value="medium" checked>
+                <label for="medium-eggs" id="medium-eggs-label">M</label>
+                <input type="radio" id="large-eggs" name="egg-size" value="large">
+                <label for="large-eggs" id="large-eggs-label">L</label>
+            </fieldset>
+            <fieldset id="egg-time-selection">
+                <legend class="visually-hidden">Boiling time for each boiling degree:</legend>
+                <!--Select boiling time of soft boiled eggs-->
+                <h2>Soft:</h2>
+                <input
+                    type="text"
+                    value="Loading..."
+                    name="time-eggs" id="time-soft-eggs">
+                <label for="time-soft-eggs" class="visually-hidden">Time for soft-boiled eggs</label>
+                <!--Select boiling time of medium boiled eggs-->
+                <h2>Medium:</h2>
+                <input
+                    type="text"
+                    value="Loading..."
+                    name="time-eggs" id="time-medium-eggs">
+                <label for="time-medium-eggs" class="visually-hidden">Time for medium-boiled eggs</label>
+                <!--Select boiling time of hard boiled eggs-->
+                <h2>Hard:</h2>
+                <input
+                    type="text"
+                    value="Loading..."
+                    name="time-eggs" id="time-hard-eggs">
+                <label for="time-hard-eggs" class="visually-hidden">Time for hard-boiled eggs</label>
+            </fieldset>
+            <input type="submit" value="Save">
+        </form>
+    </main>
+    <footer>
+        <h3>Made by Jonas B.</h3>
+    </footer>
+</body>
+</html>
