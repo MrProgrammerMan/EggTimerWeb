@@ -1,4 +1,5 @@
 window.addEventListener("load", function () {
+    this.document.getElementById("egg-size-selection").onchange = function() {loadBoilingTimes()}
     loadBoilingTimes();
 });
 
