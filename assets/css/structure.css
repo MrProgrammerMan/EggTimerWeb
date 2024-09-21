@@ -1,0 +1,92 @@
+
+html
+{
+    height: 100%;
+}
+
+.visually-hidden
+{
+    display: none;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+}
+
+nav
+{
+    padding: 2.5em;
+}
+
+nav ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li
+{
+    float: left;
+}
+
+a
+{
+    display: flex;
+}
+
+.icon
+{
+    width: 4em;
+    height: 4em;
+    padding: .5em;
+}
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#egg-size-selection
+{
+    display: flex;
+    flex-direction: row;
+    width: 9em;
+    justify-content: space-around;
+}
+
+#egg-size-selection label
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 3em;
+    width: 100%;
+}
+
+#egg-size-selection input
+{
+    display: none;
+}
+
+#egg-amount-selection
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#egg-info input[type="submit"]
+{
+    width: 10em;
+    height: 3em;
+    margin: 2em;
+}
