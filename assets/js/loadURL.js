@@ -5,30 +5,28 @@ window.addEventListener("load", function () {
 
 function loadURL() {
     try {
-        let url = window.location.href.split("?")[1];
-        console.log("Read URL: " + url);
-        let action = url.split("#")[1];
-        console.log("Action: " + action);
-        url = url.split("#")[0].split("&");
-        console.log("Rehashed URL: " + url);
-        handleAction(action, url);
+        let url = window.location.href; // Fetches the URL
+        let urlSplit = url.split("?")[1].split("#"); // Extracts part of url that contains important info
+        let action = urlSplit[1];
+        let data = urlSplit[0].split("&");
+        handleAction(action, data);
     } catch {
         console.log("No valid option chosen.");
         ensureConfigExistance();
     }
-
 }
 
-function handleAction(action, url) {
+function handleAction(action, data) {
     switch(action) {
         case "save":
-            saveConfig(url);
+            saveConfig(data);
+            loadBoilingTimes();
             break;
         case "start":
             window.location.href = "time.html";
             break;
         case "configure":
-
+            // TODO: Add possibility to update all egg sizes based on configuration link. Also add capability generate such a link in the settings page
             break;
         default:
             console.log("ERROR: Invalid action.");

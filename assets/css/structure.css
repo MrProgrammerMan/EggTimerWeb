@@ -90,3 +90,8 @@ form
     height: 3em;
     margin: 2em;
 }
+
+p
+{
+    text-align: center;
+}
