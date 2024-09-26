@@ -34,14 +34,25 @@ function time() {
     if (noOfEggs[0] > 0) {
         let timerSoft = document.getElementById("timer-soft");
         timerSoft.style.display = "block";
-        timerSoft.innerHTML = config[0]
+        let seconds = config[0] % 60;
+        let minutes = Math.floor(config[0] / 60);
+        timerSoft.innerHTML = String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');  // Config for small eggs
     }
     if (noOfEggs[1] > 0) {
-        document.getElementById("timer-medium").style.display = "block";
+        let timerMedium = document.getElementById("timer-medium");
+        timerMedium.style.display = "block";
+        let seconds = config[1] % 60;
+        let minutes = Math.floor(config[1] / 60);
+        timerMedium.innerHTML = String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');  // Config for medium eggs
     }
     if (noOfEggs[2] > 0) {
-        document.getElementById("timer-hard").style.display = "block";
+        let timerHard = document.getElementById("timer-hard");
+        timerHard.style.display = "block";
+        let seconds = config[2] % 60;
+        let minutes = Math.floor(config[2] / 60);
+        timerHard.innerHTML = String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');  // Config for large eggs
     }
+    
 
 
     setInterval(function() {
