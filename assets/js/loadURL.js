@@ -23,6 +23,7 @@ function handleAction(action, data) {
             loadBoilingTimes();
             break;
         case "start":
+            localStorage.setItem(action, data[0] + "&" + data[1] + "&" + data[2] + "&" + data[3]);
             window.location.href = "time.html";
             break;
         case "configure":

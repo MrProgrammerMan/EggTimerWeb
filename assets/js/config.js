@@ -105,13 +105,13 @@ function saveConfig(config) {
  * Used to retry once
  */
 function loadConfig() {
-    return loadConfig(false);
+    return loadConfigRetried(false);
 }
 
 /*
  * Fetches config from locaStorage and returns it for all egg sizes, fomatted as "XX:YY"
  */
-function loadConfig(defaultsSaved) {
+function loadConfigRetried(defaultsSaved) {
     let config = [];
     try{
         // Fetch config from localStorage
@@ -142,5 +142,34 @@ function loadConfig(defaultsSaved) {
         // Save defaults and retry (but only once!)
         ensureConfigExistance();
         loadConfig(true);
+    }
+}
+
+function loadConfigSeconds() {
+    return loadConfigSecondsRetried(false);
+}
+
+function loadConfigSecondsRetried(defaultsSaved) {
+    let config = [];
+    try{
+        for (let i = 0; i < defaults.length; i++) {
+            config.push(localStorage.getItem("egg-size=" + defaults[i][0]).split("&"));
+        }
+        console.log("Loaded config: " + config);
+        for (let i = 0; i < config.length; i++) {
+            for (let j = 0; j < config[0].length; j++) {
+                config[i][j] = parseInt(config[i][j].split("=")[1]);
+            }
+        }
+        return config;
+    } catch { // If no valid config exists
+        // Redirect to error page if rewrite has already been attemped
+        if (defaultsSaved) {
+            window.location.href = "error.html";
+            return;
+        }
+        // Save defaults and retry (but only once!)
+        ensureConfigExistance();
+        loadConfigSecondsRetried(true);
     }
 }
