@@ -1,5 +1,5 @@
 
-html
+html, body
 {
     height: 100%;
 }
@@ -9,13 +9,15 @@ html
     display: none;
 }
 
-body
+body {
+    margin: 0;
+}
+
+body, main
 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
-    margin: 0;
 }
 
 nav
@@ -36,7 +38,7 @@ li
     float: left;
 }
 
-a
+nav a
 {
     display: flex;
 }

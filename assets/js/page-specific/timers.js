@@ -2,60 +2,49 @@ window.addEventListener("load", function () {
     time();
 });
 
+const timerNames = ["timer-soft", "timer-medium", "timer-hard"];
+
 function time() {
-    console.log("Entered time.js");
+    // Get stored info of no. eggs chosen
     let url = localStorage.getItem("start");
-    console.log("Saved data: " + url);
-    let urlSplit = url.split("&");
-    console.log("Split url: " + urlSplit);
-    for (let i = 0; i < urlSplit.length; i++) {
-        urlSplit[i] = urlSplit[i].split("=")[1];
-    }
-    console.log("Cleaned split url: " + urlSplit);
-    let noOfEggs = [parseInt(urlSplit[1]), parseInt(urlSplit[2]), parseInt(urlSplit[3])];
-    console.log("Number of eggs: " + noOfEggs);
-    let config = loadConfigSeconds();
-    console.log("Loaded config: " + config);
-    switch (urlSplit[0]) {
-        case "small":
-            config = config[0];
-            break;
-        case "medium":
-            config = config[1];
-            break;
-        case "large":
-            config = config[2];
-            break;
-        default:
-            console.log("Error when loading config.");
-            break;
-    }
-
-    if (noOfEggs[0] > 0) {
-        let timerSoft = document.getElementById("timer-soft");
-        timerSoft.style.display = "block";
-        let seconds = config[0] % 60;
-        let minutes = Math.floor(config[0] / 60);
-        timerSoft.innerHTML = String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');  // Config for small eggs
-    }
-    if (noOfEggs[1] > 0) {
-        let timerMedium = document.getElementById("timer-medium");
-        timerMedium.style.display = "block";
-        let seconds = config[1] % 60;
-        let minutes = Math.floor(config[1] / 60);
-        timerMedium.innerHTML = String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');  // Config for medium eggs
-    }
-    if (noOfEggs[2] > 0) {
-        let timerHard = document.getElementById("timer-hard");
-        timerHard.style.display = "block";
-        let seconds = config[2] % 60;
-        let minutes = Math.floor(config[2] / 60);
-        timerHard.innerHTML = String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');  // Config for large eggs
-    }
+    // Split info into egg size, and no. eggs for each size(small, medium, large)
+    let urlSplit = url.split("&").map(param => param.split("=")[1]);
+    // Extract the no. of each egg size and convert to integer
+    let noOfEggs = urlSplit.slice(1).map(Number);
     
+    // Load the boiling time config
+    let config = loadConfigSeconds();
+    // Extract just the boiling config for the chosen egg size
+    const sizeMap = { small: 0, medium: 1, large: 2 };
+    config = config[sizeMap[urlSplit[0]] ?? console.error("Error when loading config.")];
 
+    // Show html elements corresponding to eggs actually being boiled (i.e.: no hard boiled timer if no hard eggs selected)
+    for (let i = 0; i < config.length; i++) {
+        if (noOfEggs[i] <= 0) {
+            document.getElementsByClassName("timer")[i].style.display = "none";
+        } else {
+            updateTimersVisual(timerNames[i], config[i]);
+        }
+    }
 
     setInterval(function() {
-
+        for (let i = 0; i < config.length; i++) {
+            if (noOfEggs[i] > 0) {
+                config[i]--;
+                updateTimersVisual(timerNames[i], config[i]);
+                if (config[i] <= 0) {
+                    let element = document.createElement("p");
+                    element.innerHTML = "Take out " + noOfEggs[i] + " eggs and cool off!";
+                    document.getElementsByTagName("main")[0].appendChild(element);
+                    noOfEggs[i] = -1;
+                }
+            }
+        }
     }, 1000);
+}
+
+function updateTimersVisual(id, config) {
+    let seconds = config % 60;
+    let minutes = Math.floor(config / 60);
+    document.getElementById(id).innerHTML = String(String(minutes) + ":" + String(seconds).padStart(2, '0'));
 }

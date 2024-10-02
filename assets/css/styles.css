@@ -53,5 +53,10 @@ fieldset
 
 #egg-info input[type="submit"]:hover
 {
-    background-color: rgb(42, 120, 11);
+    background-color: #d69d00;
+}
+
+#egg-info input[type="submit"]:active
+{
+    background-color: #805e00;
 }

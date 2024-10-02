@@ -1,29 +1,30 @@
 window.addEventListener("load", function () {
-    defaultsValid();
-    loadURL();
+    let action, data;
+    try {
+        let info = loadURL();
+        action = info[1];
+        data = info[0];
+    } catch {
+        console.log("Error when reading URL. No valid option chosen");
+    }
+    handleAction(action, data);
 });
 
 function loadURL() {
-    try {
-        let url = window.location.href; // Fetches the URL
-        let urlSplit = url.split("?")[1].split("#"); // Extracts part of url that contains important info
-        let action = urlSplit[1];
-        let data = urlSplit[0].split("&");
-        handleAction(action, data);
-    } catch {
-        console.log("No valid option chosen.");
-        ensureConfigExistance();
-    }
+    let url = window.location.href; // Fetches the URL
+    let urlSplit = url.split("?")[1].split("#"); // Extracts part of url that contains important info
+    return urlSplit;
 }
 
 function handleAction(action, data) {
     switch(action) {
         case "save":
             saveConfig(data);
+            // Loads newly saved config into view
             loadBoilingTimes();
             break;
         case "start":
-            localStorage.setItem(action, data[0] + "&" + data[1] + "&" + data[2] + "&" + data[3]);
+            localStorage.setItem(action, data);
             window.location.href = "time.html";
             break;
         case "configure":

@@ -1,3 +1,8 @@
+window.addEventListener("load", function() {
+    defaultsValid();
+    ensureConfigExistance();
+});
+
 // Default egg boiling times for 3 sizes of egg.
 const defaults = [
     ["small", ["360", "450", "540"]],
@@ -69,8 +74,9 @@ function ensureEggSizeConfig(size, defaults) {
 function saveConfig(config) {
     // Trigger catch is config is in format that throws exception as a result of manipulation in ways presumed to be okay if config is in correct format.
     try {
+        config = config.split("&");
         // Check that identifier is valid
-        if (config[0] !== "egg-size=small" && config[0] !== "egg-size=medium" && config[0] !== "egg-size=large") {
+        if (!["egg-size=small", "egg-size=medium", "egg-size=large"].includes(config[0])) {
             console.log("Invalid url for saving config. No data saved.");
             return;
         }
@@ -155,7 +161,6 @@ function loadConfigSecondsRetried(defaultsSaved) {
         for (let i = 0; i < defaults.length; i++) {
             config.push(localStorage.getItem("egg-size=" + defaults[i][0]).split("&"));
         }
-        console.log("Loaded config: " + config);
         for (let i = 0; i < config.length; i++) {
             for (let j = 0; j < config[0].length; j++) {
                 config[i][j] = parseInt(config[i][j].split("=")[1]);
