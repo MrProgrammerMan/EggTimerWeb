@@ -1,0 +1,20 @@
+.notification-text {
+    font-size: large;
+}
+
+.notification-btn {
+    width: 10em;
+    height: 3em;
+    margin: 1em;
+    background-color: #FFC421;
+    border: 0;
+    border-radius: 1em;
+}
+
+.notification-btn:hover {
+    background-color: #d69d00;
+}
+
+.notification-btn:active {
+    background-color: #805e00;
+}
