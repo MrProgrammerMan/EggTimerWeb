@@ -1,62 +1,50 @@
-body
-{   
+body {
     background-color: #EEF5DB;
 }
 
-fieldset
-{
+fieldset {
     border: 0;
 }
 
-#left-icon
-{
+#left-icon {
     border-radius: 1em 0 0 1em;
 }
 
-#right-icon
-{
+#right-icon {
     border-radius:  0 1em 1em 0;
 }
 
-#egg-size-selection label, .icon
-{
+#egg-size-selection label, .icon {
     background-color: #C2C9B1;
 }
 
-#egg-size-selection label:hover, .icon:hover
-{
+#egg-size-selection label:hover, .icon:hover {
     background-color: #929785;
     cursor: pointer;
 }
 
-#egg-size-selection input:checked + label
-{
+#egg-size-selection input:checked + label {
     background-color: #616559;
 }
 
-#small-eggs-label
-{
+#small-eggs-label {
     border-radius: .2em 0 0 .2em;
 }
 
-#large-eggs-label
-{
+#large-eggs-label {
     border-radius: 0 .2em .2em 0;
 }
 
-#egg-info input[type="submit"]
-{
+input[type="submit"], button {
     background-color: #FFC421;
     border: 0;
     border-radius: 1em;
 }
 
-#egg-info input[type="submit"]:hover
-{
+input[type="submit"]:hover, button:hover {
     background-color: #d69d00;
 }
 
-#egg-info input[type="submit"]:active
-{
+input[type="submit"]:active, button:active {
     background-color: #805e00;
 }
