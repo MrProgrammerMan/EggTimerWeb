@@ -1,15 +1,10 @@
-window.addEventListener("load", function () {
-    let soft = document.getElementById("no-soft-eggs");
-    let medium = document.getElementById("no-medium-eggs");
-    let hard = document.getElementById("no-hard-eggs");
+const noEggsIDs = ["no-soft-eggs", "no-medium-eggs", "no-hard-eggs"];
 
-    soft.oninput = function() {
-        document.getElementById("no-soft-eggs-visual").innerHTML = soft.value;
-    }
-    medium.oninput = function() {
-        document.getElementById("no-medium-eggs-visual").innerHTML = medium.value;
-    }
-    hard.oninput = function() {
-        document.getElementById("no-hard-eggs-visual").innerHTML = hard.value;
+window.addEventListener("load", function () {
+    for (let i = 0; i < noEggsIDs.length; i++) {
+        let element = document.getElementById(noEggsIDs[i]);
+        element.oninput = function() {
+            document.getElementById(noEggsIDs[i] + "-visual").innerHTML = element.value;
+        }
     }
 });
