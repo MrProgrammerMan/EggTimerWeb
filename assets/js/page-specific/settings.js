@@ -1,3 +1,5 @@
+const eggTimeVisualIDs = ["time-soft-eggs", "time-medium-eggs", "time-hard-eggs"];
+
 window.addEventListener("load", function () {
     this.document.getElementById("egg-size-selection").onchange = function() {loadBoilingTimes()}
     loadBoilingTimes();
@@ -19,7 +21,7 @@ function loadBoilingTimes() {
             console.log("Error when loading config.")
             break;
     }
-    document.getElementById("time-soft-eggs").value = config[0];
-    document.getElementById("time-medium-eggs").value = config[1];
-    document.getElementById("time-hard-eggs").value = config[2];
+    for (let i = 0; i < eggTimeVisualIDs.length; i++) {
+        document.getElementById(eggTimeVisualIDs[i]).value = config[i];
+    }
 }

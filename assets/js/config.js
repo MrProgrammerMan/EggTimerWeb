@@ -85,12 +85,12 @@ function saveConfig(config) {
         }
         // Convert time to correct format.
         for (let i = 1; i < config.length; i++) {
-            try { // Convert minutes and seconds to seconds
-                config[i][1] = config[i][1].split("%3A"); //Throws exception if the time in URL is not in "5:00" format, but instead "300" format.
+            if (config[i][1].includes("%3A")) {
+                config[i][1] = config[i][1].split("%3A");
                 config[i][1] = parseInt(config[i][1][0]) * 60 + parseInt(config[i][1][1]); //Convert to seconds.
-            } catch { // Convert seconds to integer to ensure validity
-                config[i][1] = parseInt(config[i][1]); //Throws exception if the time is not in seconds.
+                continue;
             }
+            config[i][1] = parseInt(config[i][1]);
         }
         let concat = "";
         for (let i = 1; i < config.length; i++) {
@@ -107,48 +107,24 @@ function saveConfig(config) {
 }
 
 /*
- * Wrapper function for loadConfig(boolean)
- * Used to retry once
- */
-function loadConfig() {
-    return loadConfigRetried(false);
-}
-
-/*
  * Fetches config from locaStorage and returns it for all egg sizes, fomatted as "XX:YY"
  */
-function loadConfigRetried(defaultsSaved) {
-    let config = [];
-    try{
-        // Fetch config from localStorage
-        for (let i = 0; i < defaults.length; i++) {
-            config.push(localStorage.getItem("egg-size=" + defaults[i][0]).split("&"));
-        }
-        // Loop through every boiling time, for each egg size and each boiling degree
-        for (let i = 0; i < config.length; i++) {
-            for (let j = 0; j < config[0].length; j++) {
-                // Convert seconds to "minutes:seconds"
-                let time = parseInt(config[i][j].split("=")[1]);
-                let seconds = time % 60;
-                time = String((time - seconds)/60);
-                seconds = String(seconds);
-                if (seconds === "0") {
-                    seconds = "00";
-                }
-                config[i][j] = time + ":" + seconds;
+function loadConfig() {
+    let config = loadConfigSeconds();
+    for (let i = 0; i < config.length; i++) {
+        for (let j = 0; j < config[0].length; j++) {
+            // Convert seconds to "minutes:seconds"
+            let time = config[i][j];
+            let seconds = time % 60;
+            let minutesStr = String((time - seconds)/60);
+            let secondsStr = String(seconds);
+            if (seconds < 10) {
+                secondsStr = "0" + secondsStr;
             }
+            config[i][j] = minutesStr + ":" + secondsStr;
         }
-        return config;
-    } catch { // If no valid config exists
-        // Redirect to error page if rewrite has already been attemped
-        if (defaultsSaved) {
-            window.location.href = "error.html";
-            return;
-        }
-        // Save defaults and retry (but only once!)
-        ensureConfigExistance();
-        loadConfig(true);
     }
+    return config;
 }
 
 function loadConfigSeconds() {

@@ -28,7 +28,15 @@ function handleAction(action, data) {
             window.location.href = "time.html";
             break;
         case "configure":
-            // TODO: Add possibility to update all egg sizes based on configuration link. Also add capability generate such a link in the settings page
+            config = data.split("&&");
+            try {
+                for (let i = 0; i < config.length; i++) {
+                    saveConfig(config[i]);
+                }
+            } catch {
+                console.log("Error when reading URL. Invalid configuration.");
+            }
+            loadBoilingTimes();
             break;
         default:
             console.log("ERROR: Invalid action.");
