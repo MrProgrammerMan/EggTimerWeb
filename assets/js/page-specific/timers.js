@@ -18,7 +18,7 @@ function time() {
     const sizeMap = { small: 0, medium: 1, large: 2 };
     config = config[sizeMap[urlSplit[0]] ?? console.error("Error when loading config.")];
 
-    let audio = new Audio('alarm.mp3');
+    let audio = new Audio("assets/audio/alarm.mp3");
 
     // Show html elements corresponding to eggs actually being boiled (i.e.: no hard boiled timer if no hard eggs selected)
     for (let i = 0; i < config.length; i++) {
@@ -35,6 +35,8 @@ function time() {
                 config[i]--;
                 updateTimersVisual(timerNames[i], config[i]);
                 if (config[i] <= 0) {
+                    let wrapper = document.createElement("div");
+                    wrapper.className = "notification-wrapper";
                     let notification = document.createElement("p");
                     notification.className = "notification-text";
                     notification.innerHTML = "Take out " + noOfEggs[i] + " eggs and cool off!";
@@ -42,10 +44,11 @@ function time() {
                     button.className = "notification-btn"
                     button.innerHTML = "OK";
                     button.onclick = function() {
-                        notification.style.display = "none";
-                        this.style.display = "none";
+                        wrapper.style.display = "none";
                     };
-                    document.getElementsByTagName("main")[0].prepend(notification, button);
+                    wrapper.appendChild(notification);
+                    wrapper.appendChild(button);
+                    document.getElementsByTagName("main")[0].prepend(wrapper);
                     noOfEggs[i] = -1;
                     audio.play();
                 }
